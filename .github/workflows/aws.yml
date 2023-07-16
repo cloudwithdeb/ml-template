@@ -1,0 +1,34 @@
+#https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+name: AWS github actions
+on:
+  push:
+    branches:
+      - hello
+  pull_request:
+    branches:
+      - hello
+  workflow_dispatch:
+env:
+  cloud: aws
+permissions:
+    id-token: write
+defaults:
+  run:
+    shell: bash
+jobs:
+  
+  HelloWorld:
+    runs-on: ubuntu-lates
+    steps:
+
+      - id: CheckoutRepository
+        name: Checkout repository
+        uses: actions/checkout@v3
+
+      - id: Auth
+        name: Authenticate to aws using OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.YOUR_AWS_ACCOUNT_ID }}:role/${{ secrets.YOUR_AWS_AUTH_IAM_ROLE }}
+          aws-region: ${{ secrets.YOUR_AWS_REGION }}
+
