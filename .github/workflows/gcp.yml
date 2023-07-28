@@ -33,8 +33,8 @@ jobs:
       name: Authenticate With GCP
       uses: google-github-actions/auth@v1
       with:
-        workload_identity_provider: "${{ env.SERVICE_ACCOUNT_NAME }}@${{ ENV.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
-        service_account: "projects/${{ env.WORKLOAD_IDENTITY_POOL_PROJECT_ID }}/locations/global/workloadIdentityPools/${{ env.WORKLOAD_IDENTITY_POOL }}/providers/${{ env.WORKLOAD_IDENTITY_PROVIDER }}"
+        workload_identity_provider: "projects/${{ env.WORKLOAD_IDENTITY_POOL_PROJECT_ID }}/locations/global/workloadIdentityPools/${{ env.WORKLOAD_IDENTITY_POOL }}/providers/${{ env.WORKLOAD_IDENTITY_PROVIDER }}"
+        service_account: "${{ env.SERVICE_ACCOUNT_NAME }}@${{ ENV.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
 
     - id: MakeBucket
       name: Make bucket
