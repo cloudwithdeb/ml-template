@@ -1,0 +1,39 @@
+name: GCP github actions
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+env:
+  WORKLOAD_IDENTITY_POOL: "k8s-pools"
+  GCP_PROJECT_ID: "trans-engine-394004"
+  WORKLOAD_IDENTITY_PROVIDER: "k8s-provider"
+  SERVICE_ACCOUNT_NAME: "k8s-service-account"
+  WORKLOAD_IDENTITY_POOL_PROJECT_ID: "446963927366"
+defaults:
+  run:
+    shell: bash
+jobs:
+  
+  HelloWorld:
+    runs-on: ubuntu-latest
+    steps:
+
+    - id: "checkout"
+      name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - id: "auth"
+      name: Authenticate With GCP
+      uses: google-github-actions/auth@v1
+      with:
+        workload_identity_provider: "${{ env.SERVICE_ACCOUNT_NAME }}@${{ ENV.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+        service_account: "projects/${{ env.WORKLOAD_IDENTITY_POOL_PROJECT_ID }}/locations/global/workloadIdentityPools/${{ env.WORKLOAD_IDENTITY_POOL }}/providers/${{ env.WORKLOAD_IDENTITY_PROVIDER }}"
+
+    - id: MakeBucket
+      name: Make bucket
+      run: |
+        gsutil mb gs://aljiauiwu83dser3

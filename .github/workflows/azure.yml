@@ -1,4 +1,3 @@
-#https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-azure
 name: Azure github actions
 on:
   push:
