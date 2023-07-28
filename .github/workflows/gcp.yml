@@ -39,4 +39,4 @@ jobs:
     - id: MakeBucket
       name: Make bucket
       run: |
-        gsutil mb gs://aljiauiwu83dser3
+        gcloud compute networks create testing10m --description "Your network description (optional)" --subnet-mode=auto
